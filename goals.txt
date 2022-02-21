@@ -1,0 +1,4 @@
+Goals
+2/23: Look at videos and different ide's in VS
+3/4: Have a server set up, be able to store data
+Start on visuals
