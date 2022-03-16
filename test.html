@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <title> Homepage </title>
+    <meta charset = "UTF-8">
+    <meta name = "title page" content ="width = device-width, initial-scale=1.0">
+    <meta name = "keywords" content = "HTML,CSS">
+    <!--ADD SOUND (MAYBE)--> 
+    <style>
+        body{
+            background-image: url('/images/red_background.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        label{
+            color: whitesmoke;
+            display: block;
+        }
+        div{
+            padding-left: 50px;
+        }
+        
+    </style> 
+</head>
+<body>
+    <h1 style = "color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">
+        <b>Welcome to Virtual Deck!</b>
+       
+    </h1>
+    <h3 style = "color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">
+        Login or Sign Up!
+    </h3>
+<br>
+</br>
+    <form>
+        <a href="login.html">
+            <input type="button" value="Login">
+        </a>
+    </form>
+    <br>
+</br>
+    <form>
+        <a href="signup.html">
+            <input type="button" value="Sign Up">
+        </a>
+    </form>
+    <br>
+</br>
+    <form>
+        <a href="lobby.html">
+            <input type="button" value="Play as Guest">
+        </a>
+    </form>
+
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+    <h5> (response test)</h5>
+    <input id="test">
+    <button onClick="myFunction()">click for response</button>
+    <h4 id="message"> </h4>
+
+    <script>
+        function myFunction(){
+            let username= document.querySelector("#username");
+            let message=document.querySelector("#message");
+
+            message.innerHTML = "welcome to virtual deck, " + test.value;
+
+        }
+    </script>
+    
+
+    <style>
+        body{
+        text-align: center;
+        }
+    </style>
+    
+</body>
