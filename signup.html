@@ -19,49 +19,63 @@
         div{
             padding-left: 50px;
         }
-        
+
     </style> 
+
+
+
 </head>
+
+
 <body>
+
+  <header>
+      <form>
+        <a href="test.html">
+            <input type="button" value="Home">
+        </a>
+
+    <a href="login.html">
+        <span style="float: right"><input type="button" value="Login"></span>
+    </a>
+        <a href="lobby.html">
+            <span style="float: right"><input type="button" value="Play as Guest"></span>
+          
+        </a>
+</form>
+</header>
+   
     <h1 style="color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">Create Account</h1>
-    <br>
-</br>
-<h4 style="color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">create username:</h4style>
-<input type="text" id="myText">
-    <br>
-</br>
-<h4 style="color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">create password:</h4style>
-    <input>
-    <br>
-</br>
-<h4 style="color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">re-type password:</h4style>
-    <input>
-    <br>
-</br>
-<h4 style="color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">email address:</h4style>
-    <input>
-    <br>
-</br>
 
-<button onClick="myFunction()" > Submit</button>
+     <table style="margin-left:auto;margin-right:auto;">
+        <tr>
+            <td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">create username:</td>
+            <td><input type="text1"/></td>
+        </tr>
+         <tr>
+            <td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">create password:</td>
+            <td><input type="text2" /></td>
+        </tr>
+        <tr>
+            <td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">re-enter password:</td>
+            <td><input type="text3" /></td>
+        </tr>
+        <tr>
+            <td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">email address:</td>
+            <td><input type="email" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>   <button>Submit</button></td>
+        </tr>
+     
+    </table>
+ 
+        
+
+        
+
+
     
- <!--NOT ALIGNED PROPERLY--> 
- <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  
-        <form>
-            <a href="login.html">
-                <input type="button" value="Login">
-            </a>
-        </form>
-
-    <script>
-        function myFunction() {
-            alert("testing");
-        }
-    </script>
-    <style>
-        body{
-        text-align: center;
-        }
-    </style>
 </body>
 </html>

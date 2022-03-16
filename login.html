@@ -25,40 +25,45 @@
     </style> 
 </head>
 <body>
+    <header>
+        <form>
+          <a href="test.html">
+              <input type="button" value="Home">
+          </a>
+      <a href="signup.html">
+          <span style="float: right"><input type="button" value="Signup"></span>
+      </a>
+          <a href="lobby.html">
+              <span style="float: right"><input type="button" value="Play as Guest"></span>
+            
+          </a>
+  </form>
+  </header>
     <h1 style = "color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">
         <b>Login</b>
        
     </h1>
-    <h4 style="color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">username:</h4style>
-        <input type="text" id="myText">
-            <br>
-        </br>
-        <h4 style="color: whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">password:</h4style>
-            <input>
-            <br>
-        </br>
-        
-        
-        <button onClick="myFunction()" > Submit</button>
+    <table style="margin-left:auto;margin-right:auto;">
+        <tr>
+            <td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">username:</td>
+            <td><input type="texta"/></td>
+        </tr>
+         <tr>
+            <td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">password:</td>
+            <td><input type="textb" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>     <button onClick="myFunction()" > Submit</button></td>
+        </tr>
+     
+    </table>
+ 
+      
             <script>
                 function myFunction() {
                     alert("testing");
                 }
             </script>
-             <style>
-                body{
-                text-align: center;
-                }
-            </style>
-        
-        
-        <br></br> <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  <br></br>  
-        <form>
-            <a href="signup.html">
-                <input type="button" value="Sign Up">
-            </a>
-        </form>
-
-
         </body>
         </html>
