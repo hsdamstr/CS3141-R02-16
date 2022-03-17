@@ -25,11 +25,14 @@ export default class Deck {
   }
 
   pop() {
-    return this.cards.shift()
+    return this.cards.shift() 
+    //shift returns the top element of the array 
+    // pop would return the bottom element of the array/botton of the deck...
   }
 
   push(card) {
     this.cards.push(card)
+    //add element to last of array
   }
 
   shuffle() {
