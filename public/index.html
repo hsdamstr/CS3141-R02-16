@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Virtual Deck</title>
+	<script type="text/javascript" src="libs/jquery.3.6.0.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>->
+	<script src="app.js"></script>
+</head>
+
+<body>
+
+	<div id="gameArea">
+
+	</div>
+
+
+	<script id="introScreen" type="text/template">
+		<style>
+			body{
+				background-image: url('/images/red_background.jpg');
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background-size: cover;
+			}
+			label{
+				color: whitesmoke;
+				display: block;
+			}
+			div{
+				padding-left: 50px;
+			}
+			
+		</style> 
+
+		<header>
+			<form>
+			  <a href="test.html">
+			  <input type="button" value="Home">
+			  </a>
+	  
+		  		 <a href="login.html">
+			  	 	<span style="float: right"><input type="button" value="Login"></span>
+		 		 </a>
+			  	 <a href="signup.html">
+				 	<span style="float: right"><input type="button" value="Signup"></span>
+			  	 </a>
+	  		</form>
+	 
+	  		<h1 style = "color:whitesmoke; text-align: center;">
+				<b>Welcome!</b>
+	  		 </h1>
+			<p style = "color: whitesmoke; text-align: center;">
+				Start or Join a Game!
+			</p>
+	   
+		</header>
+	
+		<style>
+	  button{
+		/*Change the width as much as you like, but make sure 
+		margin-left and margin-right + width = 100%*/
+		width:10%;
+		margin-left:45%;
+		margin-right:45%;
+		}
+		</style>
+	
+		<button id = "createGame"> 
+			Create Room</button>
+		<button id = "joinGame" > Join Room</button>
+	</script>
+
+	<script id="playerJoinGame" type="text/template">
+		<h1>Please Enter Your Name</h1>
+			<label for="name">Enter your name</label>
+			<input type="text" id="name">
+
+			<label for="roomNum">Room Number:</label>
+			<input type="text" id="roomNum">
+
+			<button id="submit">Submit</button>
+		</form>
+	</script>
+
+	<script id="signUp" type="text/template">
+		<head>
+			<meta charset="UTF-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Create Account Page</title>
+			<style>
+				body{
+					background-image: url('/images/red_background.jpg');
+					background-repeat: no-repeat;
+					background-attachment: fixed;
+					background-size: cover;
+				}
+				label{
+					color: whitesmoke;
+					display: block;
+				}
+				div{
+					padding-left: 50px;
+				}
+		
+			</style> 
+		
+		
+		
+		</head>
+		
+		
+		<body>
+		
+		  <header>
+			  <form>
+				<a href="test.html">
+					<input type="button" value="Home">
+				</a>
+		
+			<a href="login.html">
+				<span style="float: right"><input type="button" value="Login"></span>
+			</a>
+				<a href="lobby.html">
+					<span style="float: right"><input type="button" value="Play as Guest"></span>
+				  
+				</a>
+		</form>
+		</header>
+		   
+			<h1 style="color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">Create Account</h1>
+		
+			 <table style="margin-left:auto;margin-right:auto;">
+				<tr>
+					<td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">create username:</td>
+					<td><input type="text1"/></td>
+				</tr>
+				 <tr>
+					<td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">create password:</td>
+					<td><input type="text2" /></td>
+				</tr>
+				<tr>
+					<td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">re-enter password:</td>
+					<td><input type="text3" /></td>
+				</tr>
+				<tr>
+					<td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">email address:</td>
+					<td><input type="email" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>   <button>Submit</button></td>
+				</tr>
+			 
+			</table>
+		 
+				
+		
+				
+		
+		
+			
+		</body>
+	</script>
+
+	<script id="playerSetsName" type="text/template">
+		<h1>Player Name</h1>
+		<p>Wait for other players</p>
+	</script>
+
+	<script id="playerWaitingScreen" type="text/template">
+		<p id="playerName"> </p>
+		<div id="startInject"></div>
+	</script>
+
+
+	<!-- Host Scripts -->
+
+	<script id="hostJoinGame" type="text/template">
+
+		<p id="roomCode"></p>
+
+		<div id="player">
+			<div id="playerCount">
+
+			</div>
+		</div>
+
+	</script>
+
+	<script id="endOfGame" type="text/template">
+		<button id="playAgain">Play Again</button>
+		<button id="quit">quit</button>
+	</script>
+
+
+
+
+</body>
+
+</html>
