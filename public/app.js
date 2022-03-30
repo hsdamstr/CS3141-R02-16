@@ -79,6 +79,7 @@ jQuery(function($) {
 			App.gameArea = $('#gameArea');
 
 			App.$introScreen = $('#introScreen').html();
+			App.$signUp = $('#signUp').html();
 
 			//host screens
 			App.$hostJoinGame = $('#hostJoinGame').html();

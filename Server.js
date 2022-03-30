@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 3000
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
+const mySql = require('mysql');
+const scanf = require('scanf');
 
 instrument(io, {
 	auth: false
@@ -20,6 +22,17 @@ app.get('/', function(req,res) {
 
 //Start server
 server.listen(PORT, () => console.log('Sever running on port ' + PORT))
+
+var con = mySql.createConnection({
+	host: "127.0.0.1",
+	user: "SethD",
+	password: "TeamSoftware16"
+  });
+  
+  con.connect(function(err) {
+	if (err) throw err;
+	console.log("Connected!");
+  });
 
 
 io.on('connection', socket => {
