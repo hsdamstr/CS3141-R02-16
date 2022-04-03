@@ -72,14 +72,12 @@ if (request.session.loggedin) {
 response.end();
 });
 
-app.listen(3000);
-
 //Start server
 server.listen(PORT, () => console.log('Sever running on port ' + PORT))
 var con = mySql.createConnection({
     host: "127.0.0.1",
-    user: "root",
-    password: "teamsoftware16"
+    user: "SethD",
+    password: "TeamSoftware16"
   });
 
   con.connect(function(err) {
