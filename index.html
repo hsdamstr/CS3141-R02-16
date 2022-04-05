@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Virtual Deck</title>
+	<script type="text/javascript" src="libs/jquery.3.6.0.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>->
+	<script src="app.js"></script>
+</head>
+
+<body>
+
+	<div id="gameArea">
+
+	</div>
+
+
+	<script id="introScreen" type="text/template">
+		<style>
+			body{
+				background-image: url('/images/red_background.jpg');
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background-size: cover;
+			}
+			label{
+				color: whitesmoke;
+				display: block;
+			}
+			div{
+				padding-left: 50px;
+			}
+			
+		</style> 
+
+		<header>
+			<form>
+				<input type="button" value="Home">
+				<span style="float: right"><button id="signUp"> signUp </button></span>
+				<span style="float: right"><button id="login"> login </button></span>
+		</form>
+	 
+	  		<h1 style = "color:whitesmoke; text-align: center;">
+				<b>Welcome!</b>
+	  		 </h1>
+			<p style = "color: whitesmoke; text-align: center;">
+				Start or Join a Game!
+			</p>
+	   
+		</header>
+	
+		<style>
+	  button{
+		/*Change the width as much as you like, but make sure 
+		margin-left and margin-right + width = 100%*/
+		width:10%;
+		margin-left:45%;
+		margin-right:45%;
+		}
+		</style>
+	
+		<button id = "createGame"> 
+			Create Room</button>
+		<button id = "joinGame" > Join Room</button>
+	</script>
+
+	<script id="playerJoinGame" type="text/template">
+		<h1>Please Enter Your Name</h1>
+			<label for="name">Enter your name</label>
+			<input type="text" id="name">
+
+			<label for="roomNum">Room Number:</label>
+			<input type="text" id="roomNum">
+
+			<button id="submit">Submit</button>
+		</form>
+	</script>
+
+	<script id="signUp" type="text/template">
+		<head>
+			<style>
+				body{
+					background-image: url('/images/red_background.jpg');
+					background-repeat: no-repeat;
+					background-attachment: fixed;
+					background-size: cover;
+				}
+				label{
+					color: whitesmoke;
+					display: block;
+				}
+				div{
+					padding-left: 50px;
+				}
+		
+			</style> 
+		
+		
+		
+		</head>
+		
+		
+		<body>
+		
+		  <header>
+			  <form>
+				<a href="test.html">
+					<input type="button" value="Home">
+				</a>
+		
+			<a href="login.html">
+				<span style="float: right"><input type="button" value="Login"></span>
+			</a>
+				<a href="lobby.html">
+					<span style="float: right"><input type="button" value="Play as Guest"></span>
+				  
+				</a>
+		</form>
+		</header>
+		   
+			<h1 style="color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">Create Account</h1>
+		
+			 <table style="margin-left:auto;margin-right:auto;">
+				<tr>
+					<td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">create username:</td>
+					<td><input type="text1"/></td>
+				</tr>
+				 <tr>
+					<td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">create password:</td>
+					<td><input type="text2" /></td>
+				</tr>
+				<tr>
+					<td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">re-enter password:</td>
+					<td><input type="text3" /></td>
+				</tr>
+				<tr>
+					<td style="color: whitesmoke;  font-family: 'Courier New', Courier, monospace;">email address:</td>
+					<td><input type="email" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>   <button>Submit</button></td>
+				</tr>
+			 
+			</table>
+		 
+				
+		
+				
+		
+		
+			
+		</body>
+	</script>
+
+	<script id = "login" type = "text/template"> 
+		<head>
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width,minimum-scale=1">
+			<title>Login</title>
+			<!-- the form awesome library is used to add icons to our form -->
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+			<!-- include the stylesheet file -->
+			<link href="/style.css" rel="stylesheet" type="text/css">
+		</head>
+		<body>
+			<div class="login">
+				<h1>Login</h1>
+				<form action="/auth" method="post">
+					<label for="username">
+						<!-- font awesome icon -->
+						<i class="fas fa-user"></i>
+					</label>
+					<input type="text" name="username" placeholder="Username" id="username" required>
+					<label for="password">
+						<i class="fas fa-lock"></i>
+					</label>
+					<input type="password" name="password" placeholder="Password" id="password" required>
+					<input type="submit" value="Login">
+				</form>
+			</div>
+		</body>
+	</script>
+
+	<script id="playerSetsName" type="text/template">
+		<h1>Player Name</h1>
+		<p>Wait for other players</p>
+	</script>
+
+	<script id="playerWaitingScreen" type="text/template">
+		<h1> Waiting For Game To Start </h1>>
+		<p id="playerName"> </p>
+		<div id="startInject"></div>
+	</script>
+
+
+	<!-- Host Scripts -->
+
+	<script id="hostJoinGame" type="text/template">
+
+		<p id="roomCode"></p>
+
+		<div id="player">
+			<div id="playerCount">
+
+			</div>
+		</div>
+
+	</script>
+
+	<script id="endOfGame" type="text/template">
+		<button id="playAgain">Play Again</button>
+		<button id="quit">quit</button>
+	</script>
+
+
+
+
+</body>
+
+</html>
