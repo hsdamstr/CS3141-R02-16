@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var connection  = require('../lib/db');
+var connection  = require('../Server');
 //display login page
 router.get('/', function(req, res, next){    
 // render to views/user/add.ejs
