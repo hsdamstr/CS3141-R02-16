@@ -1,8 +1,8 @@
 ;
-jQuery(function ($) {
+jQuery(function($) {
 	'use strict';
 
-	const IO = {
+    const IO = {
 
 
 		//Called when page is initially loaded
@@ -11,17 +11,17 @@ jQuery(function ($) {
 			IO.bindEvents();
 		},
 
-		bindEvents: function () {
+        bindEvents: function () {
 			IO.socket.on('connected', IO.onConnected);
 			IO.socket.on('roomCreated', IO.onRoomCreated);
 			IO.socket.on('playerJoinedRoom', IO.onPlayerJoinedRoom);
-			IO.socket.on('player1', IO.on);
+			IO.socket.on('player1', IO.onPlayer1);
 			IO.socket.on('startGame', IO.onStart);
 
-		},
+        },
 
 
-		onConnected: function (data) {
+        onConnected: function (data) {
 			App.mySocketID = IO.socket.id;
 			console.log(IO.socket.id);
 			console.log(data.message);
@@ -29,12 +29,12 @@ jQuery(function ($) {
 
 
 		onRoomCreated: function (data) {
-			App.Player.hostPreScreen(data);
+			App.Host.hostPreScreen(data);
 		},
 
-		onPlayerJoinedRoom: function (data) {
+        onPlayerJoinedRoom: function (data) {
 
-			App.Player.playerJoinedRoom(data);
+			App.Host.playerJoinedRoom(data);
 
 		},
 
@@ -45,20 +45,21 @@ jQuery(function ($) {
 			console.log("game started");
 			console.log("Role: " + App.myRole);
 
-			if (App.myRole === 'Player') {
+			if(App.myRole === 'Player')
+			{
 				App.Round.roundStart();
 			}
 			else {
-				App.Player.startGame()
+				App.Host.startGame()
 			}
 		},
 
 
-	};
+    };
 
 
 	const App = {
-
+		
 		gameId: 0,
 
 		myRole: "",
@@ -67,19 +68,20 @@ jQuery(function ($) {
 
 		currentRound: 0,
 
-		init: function () {
+		init: function() {
 			App.cacheElements();
 			App.showInitScreen();
 			App.bindEvents();
 		},
 
-		cacheElements: function () {
+		cacheElements: function (){
 			App.$doc = $(document)
 			App.gameArea = $('#gameArea');
 
 			App.$introScreen = $('#introScreen').html();
 			App.$signUp = $('#signUp').html();
 			App.$login = $('#login').html();
+			App.$home = $('#introScreen').html();
 
 			//host screens
 			App.$hostJoinGame = $('#hostJoinGame').html();
@@ -90,10 +92,11 @@ jQuery(function ($) {
 			App.$playerSetsName = $('#playerSetsName').html();
 		},
 
-		bindEvents: function () {
-			App.$doc.on('click', '#signUp', App.Player.onSignUpClick)
-			App.$doc.on('click', '#login', App.Player.onLoginClick)
-			App.$doc.on('click', '#createGame', App.Player.onCreateClick);
+		bindEvents: function (){
+			App.$doc.on('click', '#Home' , App.Player.onHomeClick);
+			App.$doc.on('click', '#login' , App.Player.onLoginClick);
+			App.$doc.on('click', '#signUp' , App.Player.onSignUpClick);
+			App.$doc.on('click', '#createGame', App.Host.onCreateClick);
 			App.$doc.on('click', "#joinGame", App.Player.onJoinClick);
 			App.$doc.on('click', "#submit", App.Player.setName);
 			App.$doc.on('click', "#startGame", App.Player.startGameClick);
@@ -101,21 +104,12 @@ jQuery(function ($) {
 		},
 
 
-		showInitScreen: function () {
+		showInitScreen: function(){
 			App.gameArea.html(App.$introScreen);
 		},
 
 
 		Player: {
-			/**
-		 * players[{name: string, points: int}]
-		 */
-			players: [],
-
-			numPlayers: 0,
-
-			roomNum: null,
-
 			hostSocketId: '',
 
 			hostRoomNumber: '',
@@ -124,74 +118,29 @@ jQuery(function ($) {
 
 			playerOne: false,
 
-			playerDeck: [],
-
-
-			onCreateClick: function () {
-				IO.socket.emit('hostCreatedGame');
-				console.log("host created game");
+			onHomeClick : function(){
+				console.log("going back")
+				App.gameArea.html(App.$introScreen);
 			},
 
-			hostPreScreen: function (data) {
-
-				App.Player.roomNum = data.roomid;
-
-				App.myRole = "Host";
-
-				App.gameArea.html(App.$hostJoinGame);
-
-				$('#roomCode')
-					.html(data.roomid);
-
-				$('#playerCount')
-					.html("Player Count: " + App.Player.players.length);
-
-				console.log(data.roomid);
-			},
-
-			playerJoinedRoom: function (data) {
-
-				App.Player.numPlayers = App.Player.numPlayers + 1;
-
-
-				$('#playerCount')
-					.append('<p/>')
-					.text('Player Count: ' + App.Player.numPlayers)
-
-				$('#player').append('<p>Player : ' + data.pName + ' has joined the game.</p>');
-
-				App.Player.players.push(data.pName);
-			},
-
-			startGame: function () {
-
-				App.gameArea.html(App.$hostWaitingScreen);
-			},
-
-
-			onLoginClick: function () {
+			onLoginClick : function(){
+				console.log("returning player")
 				App.gameArea.html(App.$login);
 			},
 
-			onSignUpClick: function () {
+			onSignUpClick : function (){
 				console.log("new member")
-				App.gameArea.html(App.$signUp);
+				App.gameArea.html(App.$signUp);	
 			},
 
-			onJoinClick: function () {
+			onJoinClick: function (){
 				console.log("new player")
 				console.log(App.mySocketID)
 				App.gameArea.html(App.$playerJoinGame);
 			},
 
-			onPlayerPlaceCard: function () {
-				card = deck.pop.shift();
 
-				socket.emit('placecard',);
-			},
-
-
-			setName: function () {
+			setName: function (){
 				let data = {
 					name: $('#name').val(),
 					roomNum: $('#roomNum').val()
@@ -213,10 +162,10 @@ jQuery(function ($) {
 				App.Player.displayBlank();
 			},
 
-			setHost: function () {
+			setPlayer1: function () {
 
 				//sets this player to player 1
-				this.host = true;
+				this.playerOne = true;
 
 				//appends the start button
 				$("#startInject")
@@ -225,13 +174,67 @@ jQuery(function ($) {
 
 			startGameClick: function () {
 
-				IO.socket.emit('playerReqStart', { roomNum: App.Player.hostRoomNumber });
+				IO.socket.emit('playerReqStart', {roomNum: App.Player.hostRoomNumber});
 
+			}	
+		},
 
+		Host: {
+
+			roomNum: null,
+
+			/**
+			 * players[{name: string, points: int}]
+			 */
+			players: [],
+
+			numPlayers: 0,
+			/**
+			 * When create game is selected emits event to get room code
+			 */
+			onCreateClick: function () {
+				IO.socket.emit('hostCreatedGame');
+				console.log("host created game");
 			},
 
-		},
-		
+			hostPreScreen: function (data) {
+
+				App.Host.roomNum = data.roomid;
+
+				App.myRole = "Host";
+
+				App.gameArea.html(App.$hostJoinGame);
+
+				$('#roomCode')
+					.html(data.roomid);
+
+				$('#playerCount')
+					.html("Player Count: " + App.Host.players.length);
+
+				console.log(data.roomid);
+			},
+
+			playerJoinedRoom: function (data) {
+
+				App.Host.numPlayers = App.Host.numPlayers + 1;
+
+
+				$('#playerCount')
+					.append('<p/>')
+					.text('Player Count: ' + App.Host.numPlayers)
+
+				$('#player').append('<p>Player : ' + data.pName + ' has joined the game.</p>');
+
+				App.Host.players.push(data.pName);
+			},
+
+			startGame: function () {
+
+				App.gameArea.html(App.$hostWaitingScreen);
+			},
+
+		}
+
 	}
 
 	IO.init();
