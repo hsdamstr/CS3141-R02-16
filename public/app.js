@@ -1,11 +1,10 @@
-;
 jQuery(function($) {
 	'use strict';
 
     const IO = {
 
 
-		//Called when page is initially loaded
+		//Called when page is initiflly loaded
 		init: function () {
 			IO.socket = io.connect();
 			IO.bindEvents();
@@ -224,4 +223,4 @@ jQuery(function($) {
 
 	IO.init();
 	App.init();
-})
+});

@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.14.0",
+    "method-override": "^3.0.0",
+    "mysql": "^2.18.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "login",
+  "version": "1.0.0",
+  "main": "login.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hsdamstr/CS3141-R02-16.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hsdamstr/CS3141-R02-16/issues"
+  },
+  "homepage": "https://github.com/hsdamstr/CS3141-R02-16#readme",
+  "description": ""
+}
