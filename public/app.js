@@ -78,6 +78,9 @@ jQuery(function($) {
 			App.gameArea = $('#gameArea');
 
 			App.$introScreen = $('#introScreen').html();
+			App.$signUp = $('#signUp').html();
+			App.$login = $('#login').html();
+			App.$home = $('#introScreen').html();
 
 			//host screens
 			App.$hostJoinGame = $('#hostJoinGame').html();
@@ -89,7 +92,9 @@ jQuery(function($) {
 		},
 
 		bindEvents: function (){
-			App.$doc.on('click', '#signUp' , App.Player.onSignUpClick)
+			App.$doc.on('click', '#Home' , App.Player.onHomeClick);
+			App.$doc.on('click', '#login' , App.Player.onLoginClick);
+			App.$doc.on('click', '#signUp' , App.Player.onSignUpClick);
 			App.$doc.on('click', '#createGame', App.Host.onCreateClick);
 			App.$doc.on('click', "#joinGame", App.Player.onJoinClick);
 			App.$doc.on('click', "#submit", App.Player.setName);
@@ -111,6 +116,16 @@ jQuery(function($) {
 			playerName: '',
 
 			playerOne: false,
+
+			onHomeClick : function(){
+				console.log("going back")
+				App.gameArea.html(App.$introScreen);
+			},
+
+			onLoginClick : function(){
+				console.log("returning player")
+				App.gameArea.html(App.$login);
+			},
 
 			onSignUpClick : function (){
 				console.log("new member")
