@@ -10,12 +10,15 @@ const io = new Server(server);
 const mySql=require("mysql");
 const session = require('express-session');
 
+
 instrument(io, {
 	auth: false
 });
 
 //Set static folder
-app.use(express.static(path.join(__dirname, "public")))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req,res) {
 	res.sendFile(path.join(__dirname, './public/index.html'))
 })
@@ -25,9 +28,21 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'static')));
+
+
+
+server.listen(PORT, () => console.log('Sever running on port ' + PORT))
+var connection = mySql.createConnection({
+    host: "127.0.0.1",
+    user: "SethD",
+    password: "TeamSoftware16",
+	database: "myapp"
+  });
+
+  connection.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+  });
 
 
 // http://localhost:3000/auth
@@ -38,7 +53,7 @@ let password = request.body.password;
 // Ensure the input fields exists and are not empty
 if (username && password) {
 	// Execute SQL query that'll select the account from the database based on the specified username and password
-	connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+	connection.query('SELECT * FROM users WHERE name = ? AND password = ?', [username, password], function(error, results, fields) {
 		// If there is an issue with the query, output the error
 		if (error) throw error;
 		// If the account exists
@@ -47,7 +62,7 @@ if (username && password) {
 			request.session.loggedin = true;
 			request.session.username = username;
 			// Redirect to home page
-			response.redirect('/home');
+			response.redirect('/');
 		} else {
 			response.send('Incorrect Username and/or Password!');
 		}			
@@ -72,21 +87,7 @@ if (request.session.loggedin) {
 response.end();
 });
 
-
-
 //Start server
-server.listen(PORT, () => console.log('Sever running on port ' + PORT))
-var con = mySql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "teamsoftware16",
-	database: "nodelogin"
-  });
-
-  con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-  });
 
 io.on('connection', socket => {
 
@@ -158,6 +159,10 @@ io.on('connection', socket => {
         console.log("cardPlace holder")
         
     })
+
+	socket.on('playerRequestDeck' , function(data){
+		io.in(data.roomNum).emit('dealCards')
+	})
 
 	
 })
