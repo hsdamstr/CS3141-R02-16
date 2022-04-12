@@ -18,12 +18,12 @@ jQuery(function ($) {
 			IO.socket.on('player1', IO.on);
 			IO.socket.on('startGame', IO.onStart);
 			IO.socket.on('dealCards' , IO.onDealCards);
-			IO.socket.on('playerLoggedIn' , IO.onLoginClick);
-
+			IO.socket.on('playerLogged' , IO.onLoginClick);
 		},
 
 
 		onConnected: function (data) {
+			console.log(data);
 			App.mySocketID = IO.socket.id;
 			console.log(IO.socket.id);
 			console.log(data.message);
@@ -60,15 +60,17 @@ jQuery(function ($) {
 			
 		},
 
-		onLoginClick: function(){
-			App.gameArea.html(App.$introScreen);
-		}
-
+		onLoginClick: function(data){
+			//App.myUserName =  data.username;
+			
+		},
 
 	};
 
 
 	const App = {
+
+		myUserName: null,
 
 		gameId: 0,
 
@@ -111,6 +113,15 @@ jQuery(function ($) {
 
 		showInitScreen: function () {
 			App.gameArea.html(App.$introScreen);
+
+			if (App.myUserName != null){
+				$('#userName')
+					.append('<p/>')
+					.text('Welcome: ' + App.myUserName)
+			}
+
+
+			
 		},
 
 
@@ -184,6 +195,7 @@ jQuery(function ($) {
 
 			onLoginClick: function () {
 				App.gameArea.html(App.$login);
+
 			},
 
 			onSignUpClick: function () {
@@ -225,6 +237,8 @@ jQuery(function ($) {
 				});
 				App.gameArea.html(App.$waiting);
 			},
+
+		
 
 			setHost: function () {
 
