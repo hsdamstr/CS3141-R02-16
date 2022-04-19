@@ -93,7 +93,7 @@ jQuery(function ($) {
 			App.$introScreen = $('#introScreen').html();
 			App.$signUp = $('#signUp').html();
 			App.$login = $('#login').html();
-
+			App.$ready = $('#ready').html();
 			App.$hostJoinGame = $('#hostJoinGame').html();
 			App.$waiting = $('#waiting').html();
 			App.$playerJoinGame = $('#playerJoinGame').html();
@@ -101,6 +101,7 @@ jQuery(function ($) {
 		},
 
 		bindEvents: function () {
+			App.$doc.on('click', '#ready', App,this.Player.onReadyClick);
 			App.$doc.on('click', '#signUp', App.Player.onSignUpClick)
 			App.$doc.on('click', '#login', App.Player.onLoginClick)
 			App.$doc.on('click', '#createGame', App.Player.onCreateClick);
@@ -186,6 +187,10 @@ jQuery(function ($) {
 				$('#player').append('<p>Player : ' + data.pName + ' has joined the game.</p>');
 
 				App.Player.players.push(data.pName);
+			},
+
+			onReadyClick: function(){
+				App.gameArea.html(App.$game);	
 			},
 
 			startGame: function () {
