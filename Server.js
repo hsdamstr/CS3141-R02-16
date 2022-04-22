@@ -9,17 +9,20 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 const mySql = require("mysql");
 const session = require('express-session');
+var mysql = require('mysql');
+const { Hash } = require('crypto');
 
 
 instrument(io, {
 	auth: false
 });
 
+let username;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', function (req, res) {
-	res.sendFile(path.join(__dirname, 'public/login.html'))
+	res.sendFile(path.join(__dirname, 'public/index.html'))
 })
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -34,8 +37,8 @@ app.use(session({
 server.listen(PORT, () => console.log('Sever running on port ' + PORT))
 var connection = mySql.createConnection({
 	host: "127.0.0.1",
-	user: "SethD",
-	password: "TeamSoftware16",
+	user: "root",
+	password: "teamsoftware16",
 	database: "myapp"
 });
 
@@ -48,12 +51,12 @@ connection.connect(function (err) {
 // http://localhost:3000/auth
 app.post('/auth', function (request, response) {
 	// Capture the input fields
-	let username = request.body.username;
+	username = request.body.username;
 	let password = request.body.password;
 	// Ensure the input fields exists and are not empty
 	if (username && password) {
 		// Execute SQL query that'll select the account from the database based on the specified username and password
-		connection.query('SELECT * FROM users WHERE name = ? AND password = ?', [username, password], function (error, results, fields) {
+		connection.query('SELECT * FROM users WHERE name = ? AND password = ?', [username, password], function (error, results) {
 			// If there is an issue with the query, output the error
 			if (error) throw error;
 			// If the account exists
@@ -88,6 +91,43 @@ app.get('/home', function (request, response) {
 	}
 	response.end();
 });
+
+let user;
+let password;
+let email;
+var passwordHash = require('password-hash');
+//CREATE USER
+app.post("/createUser", function (req,res) {
+	user = req.body.name;
+	password = req.body.password;
+	email = req.body.email;
+	 const sqlSearch = 'SELECT * FROM users WHERE name = ?';
+	 const search_query = mysql.format(sqlSearch,[user]);
+	 const sqlInsert = 'INSERT INTO users(name, password, email) VALUES (?,?,?)';
+	 const insert_query = mySql.format(sqlInsert,[user, password, email]);
+
+	connection.query (search_query, function (err, result) {
+	  if (err) throw (err)
+	  console.log("------> Search Results")
+	  console.log(result.length);
+	  if (result.length != 0) {
+	   connection.release();
+	   console.log("------> User already exists");
+	   res.sendStatus(409) 
+	  } 
+	  else {
+	connection.query (insert_query, (err, result) => {
+	   //connection.release()
+	   if (err) throw (err)
+	   console.log ("--------> Created new User");
+	   console.log(result.insertId);
+	   res.sendStatus(201);
+	  })
+	 }
+	}) //end of connection.query()
+	}) //end of app.post()
+
+	
 
 
 //Start server
@@ -164,6 +204,8 @@ io.on('connection', socket => {
 	socket.on('playerRequestDeck', function (data) {
 		io.in(data.roomNum).emit('dealCards')
 	})
+
+	socket.emit('playerLogged', {user: username})
 
 	socket.on("requestLog", function (request, response) {
 		response.redirect('/auth')
