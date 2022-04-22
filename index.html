@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-
+<html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
 	<title>Virtual Deck</title>
 	<script type="text/javascript" src="libs/jquery.3.6.0.js"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>->
@@ -39,7 +40,6 @@
 			<form>
 				<span style="float: right"><button id="signUp"> signUp </button></span>
 				<span style="float: right"><button id="login"> login </button></span>
-				<span style="float: left"><button id="account"> account </button></span>
 		</form>
 	 
 	  		<h1 style = "color:whitesmoke; text-align: center;">
@@ -85,6 +85,7 @@
 
 	<script id="signUp" type="text/template">
 		<head>
+			
 			<style>
 				body{
 					background-image: url('/images/red_background.jpg');
@@ -119,40 +120,20 @@
 		</form>
 		</header>
 			<div class = "signUp">
-			<h1 style="color:#5b6574; text-align: center; font-family: 'Courier New', Courier, monospace;"><b>Create Account</b></h1>
-		
-			 <table style="margin-left:auto;margin-right:auto;">
-				<tr>
-					<td style="color: #5b6574;  font-family: 'Courier New', Courier, monospace;">create username:</td>
-					<td><input type="text1"/></td>
-				</tr>
-				 <tr>
-					<td style="color: #5b6574;  font-family: 'Courier New', Courier, monospace;">create password:</td>
-					<td><input type="text2" /></td>
-				</tr>
-				<tr>
-					<td style="color: #5b6574;  font-family: 'Courier New', Courier, monospace;">re-enter password:</td>
-					<td><input type="text3" /></td>
-				</tr>
-				<tr>
-					<td style="color: #5b6574;  font-family: 'Courier New', Courier, monospace;">email address:</td>
-					<td><input type="email" /></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>   <button>Submit</button></td>
-				</tr>
-			</div>
-			</table>
-		 
-				
-		
-				
-		
-		
-			
+			<h1 style="color:whitesmoke; text-align: center; font-family: 'Courier New', Courier, monospace;">Create Account</h1>
+			<form action="/createUser" method="post">
+			<input type="text" name="name" placeholder="Enter username" id="name" required>
+			<input type="text" name="password" placeholder="Enter password" id="password" required>
+			<input type="email" name="email" placeholder="Enter email" id="email" required>
+
+
+			<input type="submit" value="Create Account">
+		</form>
+		</div>	
 		</body>
 	</script>
+
+
 
 	<script id = "login" type = "text/template"> 
 		<head>
@@ -219,56 +200,6 @@
 		<button id="playAgain">Play Again</button>
 		<button id="quit">quit</button>
 	</script>
-
-
-	<script id="account" type="text/template">
-		<title> My Account </title>
-		<meta charset = "UTF-8">
-		<meta name = "title page" content ="width = device-width, initial-scale=1.0">
-		<meta name = "account page" content ="width = device-width, initial-scale=1.0">
-		<meta name = "keywords" content = "HTML,CSS">
-		<!--ADD SOUND (MAYBE)--> 
-		<style>
-			body{
-				background-image: url('/images/red_background.jpg');
-				background-repeat: no-repeat;
-				background-attachment: fixed;
-				background-size: cover;
-			}
-			label{
-				color: whitesmoke;
-				display: block;
-			}
-			div{
-				padding-left: 50px;
-			}
-			img{
-				width: 175px;
-				display: block;
-				margin-left: auto;
-				margin-right: auto;
-			}
-			
-		</style> 
-	</head>
-	<body>
-		
-		<h1 style = "color:whitesmoke; text-align: center;">
-			<b>My Account</b>
-		</h1>
-	
-		<img src="/images/Prof Pic.jpg">
-		<br>
-		<p style="color: whitesmoke; text-align: center;"><b>Username:</b></p>
-		<p style="color: whitesmoke; text-align: center;"> ******** Insert Username Here ********</p>
-		<p style="color: whitesmoke; text-align: center;"><b>Games Played:</b></p>
-		<p style="color: whitesmoke; text-align: center;"> ******** Insert Games Played Here ********</p>
-		<p style="color: whitesmoke; text-align: center;"><b>Wins:</b></p>
-		<p style="color: whitesmoke; text-align: center;"> ******** Insert Wins Here ********</p>
-	</body>
-
-	</script>
-
 
 
 </body>
